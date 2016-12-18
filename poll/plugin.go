@@ -127,7 +127,7 @@ func pollShow(roomId string) string {
 
 	poll, ok := polls[roomId]
 	if !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 
 	status := ""
@@ -156,7 +156,7 @@ func pollRemove(roomId string) string {
 	defer mutex.Unlock()
 
 	if _, ok := polls[roomId]; !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 
 	delete(polls, roomId)
@@ -170,7 +170,7 @@ func pollAddOption(roomId, option string) string {
 
 	poll, ok := polls[roomId]
 	if !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 
 	op := pollOption{
@@ -187,7 +187,7 @@ func pollStart(roomId string) string {
 
 	poll, ok := polls[roomId]
 	if !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 	if poll.IsActive {
 		return "The poll is currently running."
@@ -207,7 +207,7 @@ func pollEnd(roomId string) string {
 
 	poll, ok := polls[roomId]
 	if !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 	if !poll.IsActive {
 		return "There is no active poll."
@@ -224,7 +224,7 @@ func pollVote(roomId, userId string, index int) string {
 
 	poll, ok := polls[roomId]
 	if !ok {
-		return "There is no vote."
+		return "There is no poll."
 	}
 	if !poll.IsActive {
 		return "There is no active poll. Use !poll start to start the poll."
